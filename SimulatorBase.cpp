@@ -1,5 +1,5 @@
-#include "SimulatorBase"
+#include "SimulatorBase.hpp"
 
-Dot::Dot(double m){
-    this.m = m;
-}
+
+
+
