@@ -6,6 +6,8 @@ class Dot{
     double pos[3];
     double vel[3];
     double acc[3];
+    Dot();
+    Dot(double m, double x, double y, double z);
 };
 
 class Spring{
@@ -19,14 +21,16 @@ class Spring{
 
 class Simulator{
     public:
-    std::vector<Dot> dots;
-    std::vector<Spring> springs;
+    std::vector<Dot*> dots;
+    std::vector<Spring*> springs;
     double dt;
 
 
-    addDot(Dot& d);
-    addSpring(Spring& s, int index1, int index2);
-    interact();
-    integrate();
+    void addDot(Dot* d);
+    void addDot(double m, double x, double y, double z);
+    void addSpring(Spring& s, int index1, int index2);
+    void interact();
+    void integrate();
+    ~Simulator();
 
 };
