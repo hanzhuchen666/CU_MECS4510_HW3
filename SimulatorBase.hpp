@@ -1,11 +1,16 @@
 #include <vector>
+#include <string>
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <fstream>
 
 class Dot{
     public:
     double m;
     double pos[3];
-    double vel[3];
-    double acc[3];
+    double vel[3]{0.0, 0.0, 0.0};
+    double acc[3]{0.0, 0.0, 0.0};
     Dot();
     Dot(double m, double x, double y, double z);
 
@@ -27,10 +32,12 @@ class Simulator{
     std::vector<Dot*> dots;
     std::vector<Spring*> springs;
     double dt= 0.001;
+    int t = 0;
     double step;
     std::vector<double*> Fint;
     std::vector<double*> Fext;
     std::vector<double*> deltaPos;
+    double* buffer;
     void distance(int dot1, int dot2);
     int getIndex(int i, int j);
 
@@ -44,7 +51,9 @@ class Simulator{
     void update();
     Simulator(double dt, int step);
     ~Simulator();
-    int saveFile();
+    int saveFile(const std::string& filename, double* data, int data_size);
+    int uploadFile(const std::string& filename);
     void run();
+    
 
 };
