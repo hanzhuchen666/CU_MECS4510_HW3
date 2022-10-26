@@ -8,7 +8,9 @@ class Dot{
     double acc[3];
     Dot();
     Dot(double m, double x, double y, double z);
+
 };
+
 
 class Spring{
     public:
@@ -17,20 +19,32 @@ class Spring{
     double a;
     double b;
     double c;
+    Spring(double k, double l0);
 };
 
 class Simulator{
     public:
     std::vector<Dot*> dots;
     std::vector<Spring*> springs;
-    double dt;
+    double dt= 0.001;
+    double step;
+    std::vector<double*> Fint;
+    std::vector<double*> Fext;
+    std::vector<double*> deltaPos;
+    void distance(int dot1, int dot2);
+    int getIndex(int i, int j);
 
 
     void addDot(Dot* d);
     void addDot(double m, double x, double y, double z);
-    void addSpring(Spring& s, int index1, int index2);
+    void addSpring(Spring* s, int index1, int index2);
+    void addSpring(double k, double l0);
     void interact();
     void integrate();
+    void update();
+    Simulator(double dt, int step);
     ~Simulator();
+    int saveFile();
+    void run();
 
 };
