@@ -143,7 +143,7 @@ int Simulator::saveFile(const std::string& filename, double* data, int data_size
 };
 
 int Simulator::uploadFile(const std::string& filename){
-    system("gsutil cp "+ filename+" gs://hanzhuchen666/");
+    
     return 0;
 };
 
