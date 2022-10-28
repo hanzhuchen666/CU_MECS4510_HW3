@@ -130,40 +130,7 @@ Simulator::~Simulator(){
     }
 };
 
-int Buffer::saveFile(const std::string& filename, double** data, int data_size){
-    std::ofstream outfile;
-    outfile.open(filename, std::ios::trunc);
-    for(int i = 0; i< data_size; ++i){
-        outfile<<data[i]<<"\n";
-    }
-    outfile.close();
-    return 0;
-};
 
-int Simulator::uploadFile(const std::string& filename){
-    
-    return 0;
-};
-
-Buffer::Buffer(int n_dots, int n_steps){
-    this->n_dots = n_dots;
-    this->n_steps = n_steps;
-    this->posBuffer = new double* [3*n_dots];
-    for(int i =0; i< 3*n_dots; ++i){
-        this->posBuffer[i] = new double[n_steps];
-    }
-};
-
-Buffer::~Buffer(){
-    for(int i = 0; i< 3*this->n_dots; ++i){
-        delete[] this->posBuffer[i];
-    }
-    delete []this->posBuffer;
-};
-
-void Buffer::record(int step, &){
-    this->posBuffer[]
-};
 
 
 

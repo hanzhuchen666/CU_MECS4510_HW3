@@ -53,16 +53,3 @@ class Simulator{
 
 };
 
-class Buffer{
-    public:
-    int n_dots, n_steps;
-    double ** posBuffer;
-    double ** velBuffer;
-    double ** accBuffer;
-    int saveFile(const std::string& filename, double** data, int data_size);
-    int uploadFile(const std::string& filename);
-    void record();
-    Buffer(int n_dots, int n_steps);
-    ~Buffer();
-
-};
