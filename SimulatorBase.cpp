@@ -110,7 +110,6 @@ void Simulator::integrate(){
 Simulator::Simulator(double dt, int step){
     this->dt = dt;
     this->step = step;
-    this->buffer = new double[step];
 };
 
 Simulator::~Simulator(){
@@ -121,18 +120,17 @@ Simulator::~Simulator(){
         delete(this->springs[i]);
     }
     for(int i = 0; i< this->Fext.size(); ++i){
-        delete(this->Fext[i]);
+        delete[] (this->Fext[i]);
     }
     for(int i = 0; i< this->Fint.size(); ++i){
-        delete(this->Fint[i]);
+        delete[] (this->Fint[i]);
     }
     for(int i = 0; i< this->deltaPos.size(); ++i){
-        delete(this->deltaPos[i]);
+        delete[] (this->deltaPos[i]);
     }
-    delete this->buffer;
 };
 
-int Simulator::saveFile(const std::string& filename, double* data, int data_size){
+int Buffer::saveFile(const std::string& filename, double** data, int data_size){
     std::ofstream outfile;
     outfile.open(filename, std::ios::trunc);
     for(int i = 0; i< data_size; ++i){
@@ -142,11 +140,31 @@ int Simulator::saveFile(const std::string& filename, double* data, int data_size
     return 0;
 };
 
-int Simulator::uploadFile(const std::string& filename){
-    system("gsutil cp "+ filename+" gs://hanzhuchen666/");
+int Buffer::uploadFile(const std::string& filename){
+    // system("gsutil cp "+ filename+" gs://hanzhuchen666/");
+    // return 0;
     return 0;
 };
 
+Buffer::Buffer(int n_dots, int n_steps){
+    this->n_dots = n_dots;
+    this->n_steps = n_steps;
+    this->posBuffer = new double* [3*n_dots];
+    for(int i =0; i< 3*n_dots; ++i){
+        this->posBuffer[i] = new double[n_steps];
+    }
+};
+
+Buffer::~Buffer(){
+    for(int i = 0; i< 3*this->n_dots; ++i){
+        delete[] this->posBuffer[i];
+    }
+    delete []this->posBuffer;
+};
+
+void Buffer::record(int step, &){
+    this->posBuffer[]
+};
 
 
 

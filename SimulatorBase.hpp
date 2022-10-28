@@ -37,11 +37,8 @@ class Simulator{
     std::vector<double*> Fint;
     std::vector<double*> Fext;
     std::vector<double*> deltaPos;
-    double* buffer;
     void distance(int dot1, int dot2);
     int getIndex(int i, int j);
-
-
     void addDot(Dot* d);
     void addDot(double m, double x, double y, double z);
     void addSpring(Spring* s, int index1, int index2);
@@ -51,9 +48,21 @@ class Simulator{
     void update();
     Simulator(double dt, int step);
     ~Simulator();
-    int saveFile(const std::string& filename, double* data, int data_size);
-    int uploadFile(const std::string& filename);
     void run();
     
+
+};
+
+class Buffer{
+    public:
+    int n_dots, n_steps;
+    double ** posBuffer;
+    double ** velBuffer;
+    double ** accBuffer;
+    int saveFile(const std::string& filename, double** data, int data_size);
+    int uploadFile(const std::string& filename);
+    void record();
+    Buffer(int n_dots, int n_steps);
+    ~Buffer();
 
 };
