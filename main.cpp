@@ -8,7 +8,7 @@ int main(){
     double dt = 0.001;
 
     // BouncingBoxSim sim = BouncingBoxSim(dt, step);
-    TwoDotsSim sim = TwoDotsSim(dt, step);
+    Simulator sim = Simulator(0.001, 10000);
     
     for(int i =0; i< sim.step; ++i){
         sim.update();
