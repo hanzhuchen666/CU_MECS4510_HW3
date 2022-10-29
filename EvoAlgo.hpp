@@ -3,7 +3,6 @@
 
 #include<random>
 
-
 class Evo{
     
 };

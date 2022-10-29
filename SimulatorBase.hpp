@@ -21,6 +21,7 @@ class Robot{
     void randomGenerate(int ndots);
     int getIndex(int i, int j);
     void update(double dt);
+    
 };
 
 class TwoPoints:public Robot{
