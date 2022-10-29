@@ -5,6 +5,9 @@
 #include <cmath>
 #include <fstream>
 
+#ifndef _SIMULATORBASE_H
+#define _SIMULATORBASE_H
+
 class Dot{
     public:
     double m;
@@ -62,4 +65,6 @@ class TwoDotsSim: public Simulator{
     public:
     TwoDotsSim(double dt, int step);
 };
+
+#endif
 

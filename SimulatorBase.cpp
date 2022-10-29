@@ -1,7 +1,6 @@
 #include "SimulatorBase.hpp"
 
 
-
 Dot::Dot(){};
 Dot::Dot(double m, double x, double y, double z){
     this->m = m;
@@ -10,16 +9,11 @@ Dot::Dot(double m, double x, double y, double z){
     this->pos[2] = z;
 };
 
-
-
 Spring::Spring(double k, double l0){
     this->k = k;
     this->l0 = l0;
 };
-
     
-
-
 void Simulator::distance(int dot1, int dot2){
     int index = this->getIndex(dot1, dot2);
     
@@ -152,13 +146,15 @@ BouncingBoxSim::BouncingBoxSim(double dt, int step):Simulator(dt, step){
 TwoDotsSim::TwoDotsSim(double dt, int step):Simulator(dt, step){
     int n_dot = 2;
     int n_spring = n_dot * (n_dot -1)/2;
+
     this->addDot(1,0,0,0);
     this->addDot(1,1,0,0);
     for(int i =0; i< n_spring; ++i){
         this->addSpring(0.5 ,0.5);
         this->deltaPos.push_back(new double[4]);
     }
+};
 
-}
+
 
 
