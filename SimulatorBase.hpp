@@ -53,3 +53,10 @@ class Simulator{
 
 };
 
+class BouncingBoxSim: public Simulator{
+    public:
+    BouncingBoxSim(double dt, int step);
+
+
+};
+
