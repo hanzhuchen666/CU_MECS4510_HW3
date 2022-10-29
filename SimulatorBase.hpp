@@ -56,7 +56,10 @@ class Simulator{
 class BouncingBoxSim: public Simulator{
     public:
     BouncingBoxSim(double dt, int step);
+};
 
-
+class TwoDotsSim: public Simulator{
+    public:
+    TwoDotsSim(double dt, int step);
 };
 

@@ -130,4 +130,35 @@ Simulator::~Simulator(){
     }
 };
 
+BouncingBoxSim::BouncingBoxSim(double dt, int step):Simulator(dt, step){
+    int n_dot = 8;
+    int n_spring = n_dot * (n_dot -1)/2;
+    
+    this->addDot(1,0,0,0);
+    this->addDot(1,1,0,0);
+    this->addDot(1,0,1,0);
+    this->addDot(1,1,1,0);
+    this->addDot(1,0,0,1);
+    this->addDot(1,0,1,1);
+    this->addDot(1,1,0,1);
+    this->addDot(1,1,1,1);
+
+    for(int i =0; i< n_spring; ++i){
+        this->addSpring(0.5 ,0.5);
+        this->deltaPos.push_back(new double[4]);
+    }
+};
+
+TwoDotsSim::TwoDotsSim(double dt, int step):Simulator(dt, step){
+    int n_dot = 2;
+    int n_spring = n_dot * (n_dot -1)/2;
+    this->addDot(1,0,0,0);
+    this->addDot(1,1,0,0);
+    for(int i =0; i< n_spring; ++i){
+        this->addSpring(0.5 ,0.5);
+        this->deltaPos.push_back(new double[4]);
+    }
+
+}
+
 
