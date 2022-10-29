@@ -155,6 +155,45 @@ TwoDotsSim::TwoDotsSim(double dt, int step):Simulator(dt, step){
     }
 };
 
+void Robot::addSprings(){
+    this->springs.push_back(1.0);
+    this->springs.push_back(0.0);
+    this->springs.push_back(0.0);
+    this->springs.push_back(0.5);
+};
 
+void Robot::addDots(double m){
+    this->dots.push_back(m);
+    for(int i = 0; i < 3; ++i){
+        this->PVA.push_back(rand());
+    }
+    for(int i = 0; i< 6; ++i){
+        this->PVA.push_back(0.0);
+    }
+    for(int i  =0; i< this->dots.size()-1; ++i){
+        addSprings();
+    }
+    return;
+}
+
+void Robot::addDots(double m, double x, double y, double z){
+    this->dots.push_back(m);
+    this->PVA.push_back(x);
+    this->PVA.push_back(y);
+    this->PVA.push_back(z);
+    for(int i = 0; i< 6; ++i){
+        this->PVA.push_back(0.0);
+    }
+    for(int i  =0; i< this->dots.size()-1; ++i){
+        addSprings();
+    }
+    return;
+};
+
+void Robot::randomGenerate(int n){
+    // for(int i = 0; i< n; ++i){
+    //     this->addDots()
+    // }
+}
 
 

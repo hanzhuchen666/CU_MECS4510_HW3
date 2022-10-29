@@ -30,6 +30,19 @@ class Spring{
     Spring(double k, double l0);
 };
 
+class Robot{
+    public:
+
+    std::vector<double> dots;// stride = 1
+    std::vector<double> springs;// stride = 4 a*sin(wt + b) + c ,k
+    std::vector<double> PVA;// stride = 9
+    void addDots(double m);
+    void addDots(double m, double x, double y, double z);
+    void addSprings();
+    void randomGenerate(int ndots);
+    
+};
+
 class Simulator{
     public:
     std::vector<Dot*> dots;
