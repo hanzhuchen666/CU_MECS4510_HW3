@@ -23,7 +23,13 @@ class Robot{
     void update(double dt);
 };
 
+class TwoPoints:public Robot{
+    public:
+    TwoPoints();
+};
+
 class BoxRobot:public Robot{
+    public:
     BoxRobot();
 };
 

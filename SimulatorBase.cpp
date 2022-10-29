@@ -1,8 +1,5 @@
 #include "SimulatorBase.hpp"
 
-
-
-
 int Robot::getIndex(int i, int j){
     if(i>j){
         return i*(i-1)/2 + j;
@@ -35,10 +32,10 @@ Simulator::~Simulator(){
 
 
 void Robot::addSprings(){
-    this->springs.push_back(1.0);
+    this->springs.push_back(100.0);
     this->springs.push_back(0.0);
     this->springs.push_back(0.0);
-    this->springs.push_back(0.5);
+    this->springs.push_back(1.5);
 };
 
 void Robot::addDots(double m){
@@ -118,15 +115,20 @@ void Robot::update(double dt){
     }
 };
 
-BoxRobot(){
-    Robot::addDots(1,0,0,0);
-    Robot::addDots(1,1,0,0);
-    Robot::addDots(1,0,1,0);
-    Robot::addDots(1,0,0,1);
-    Robot::addDots(1,1,1,0);
-    Robot::addDots(1,0,1,1);
-    Robot::addDots(1,1,0,1);
-    Robot::addDots(1,1,1,1);
+BoxRobot::BoxRobot(){
+    this->addDots(1,0,0,0);
+    this->addDots(1,1,0,0);
+    this->addDots(1,0,1,0);
+    this->addDots(1,0,0,1);
+    this->addDots(1,1,1,0);
+    this->addDots(1,0,1,1);
+    this->addDots(1,1,0,1);
+    this->addDots(1,1,1,1);
 };
+
+TwoPoints::TwoPoints(){
+    this->addDots(1,0,0,0);
+    this->addDots(1,1,0,0);
+}
 
 
