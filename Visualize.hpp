@@ -1,7 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#ifndef _VISUALIZE_H
-#define _VISUALIZE_H
+
 
 
 class Visualizer{
@@ -13,4 +12,3 @@ class Visualizer{
     int blankWindow();
 };
 
-#endif

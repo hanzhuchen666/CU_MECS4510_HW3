@@ -6,9 +6,11 @@
 
 用于定义质点、弹簧行为，定义物理规则并负责计算，
 
-- class Dot
-- class Spring
-- class Simulator
+- class Robot
+  - vector<double> dots;
+  - vector<double>springs;
+  - vector<double> PVA;
+  - 
 
 ### EvoAlgo
 

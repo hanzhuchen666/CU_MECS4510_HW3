@@ -6,19 +6,17 @@ int main(){
 
     // BouncingBoxSim sim = BouncingBoxSim(dt, step);
     Simulator sim = Simulator(0.001, 10000000);
-    BoxRobot* robot = new BoxRobot();
-    sim.robots.push_back(robot);
-    sim.robots.push_back(new TwoPoints());
-    std::cout<<robot->dots.size()
-    <<" "<<robot->springs.size()<<" "<<
-    robot->PVA.size()<<std::endl;
+    
+    auto& robots = (sim.robots);
+    robots.push_back(new BoxRobot());
+    robots.push_back(new TwoPoints());
     for(int i =0 ; i<sim.step; ++i){
         sim.update();
         if(i%100==0){
-            std::cout<<sim.robots[1]->PVA[0]
-            <<" "<<sim.robots[1]->PVA[1]<<
-            " "<<sim.robots[1]->PVA[2]<<
-            "   "<<sim.robots[1]->PVA[9]
+            std::cout<<robots[1]->PVA[0]
+            <<" "<<robots[1]->PVA[1]<<
+            " "<<robots[1]->PVA[2]<<
+            "   "<<robots[1]->PVA[9]
             <<std::endl;
         }
 

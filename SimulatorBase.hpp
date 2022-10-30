@@ -1,13 +1,10 @@
+#pragma once
 #include <vector>
 #include <string>
 #include <iostream>
 #include <cstring>
 #include <cmath>
 #include <fstream>
-
-#ifndef _SIMULATORBASE_H
-#define _SIMULATORBASE_H
-
 
 class Robot{
     public:
@@ -18,9 +15,8 @@ class Robot{
     void addDots(double m);
     void addDots(double m, double x, double y, double z);
     void addSprings();
-    void randomGenerate(int ndots);
+    static Robot* randomGenerate(int ndots);
     int getIndex(int i, int j);
-    void update(double dt);
     
 };
 
@@ -44,9 +40,13 @@ class Simulator{
     Simulator(double dt, int step);
     ~Simulator();
 
+    void randomAddRobots(int n_robot, int n_dots);
+    void mutate(double rate);
+    void crossOver();
+    void rankSelection();
+
     
 
 };
 
-#endif
 
