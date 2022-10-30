@@ -8,11 +8,6 @@ int main(){
     double dt = 0.001;
 
     // BouncingBoxSim sim = BouncingBoxSim(dt, step);
-    Simulator sim = Simulator(0.001, 10000000);
-    
-    auto& robots = (sim.robots);
-    robots.push_back(new BoxRobot());
-    robots.push_back(new TwoPoints());
     // for(int i =0 ; i<sim.step; ++i){
     //     sim.update();
     //     if(i%100==0){
@@ -56,7 +51,7 @@ int main(){
             0, 1, 5,  //bottom
             0, 4, 5
         };
-    while(1){
+    while(!glfwWindowShouldClose(vis.window)){
         vis.input(vertices,indices);
         vis.inloop();
     }
