@@ -65,11 +65,11 @@ int Visualizer::initShader(){
     return 0;
 }
 
-void Visualizer::input(float* vertices, unsigned int* indices){
+void Visualizer::input(float* vertices, int sizeofV, unsigned int* indices, int sizeofI){
     glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeofV, vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeofI, indices, GL_STATIC_DRAW);
         // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -89,7 +89,7 @@ void processInput(GLFWwindow *window){
         glfwSetWindowShouldClose(window, true);
 }
 
-void Visualizer::inloop(){
+void Visualizer::inloop1(){
     // input
         // -----
         processInput(window);
@@ -119,13 +119,20 @@ void Visualizer::inloop(){
                 // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
         corShader->setMat4("projection", projection);
 
-                // render box
-        glBindVertexArray(VAO);
-//        glDrawArrays(GL_TRIANGLES, 0, 36);
-        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+
+
 };
 
+void Visualizer::inloop2(){
+    glBindVertexArray(this->VAO);
+        glPointSize(50);
+//        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDrawElements(GL_POINTS, 36, GL_UNSIGNED_INT, 0);
+        // glDrawElements(GL_POINTS,2,GL_UNSIGNED_INT,0);
+
+
+        glfwSwapBuffers(this->window);
+        glfwPollEvents();
+};

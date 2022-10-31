@@ -23,9 +23,10 @@ class Visualizer{
     ~Visualizer();
     int initWindow();
     int initShader();
-    void input(float* vertices, unsigned int* indices);
+    void input(float* vertices, int sizeofV, unsigned int* indices, int sizeofI);
     //循环内函数
-    void inloop();
+    void inloop1();
+    void inloop2();
 
 
     unsigned int VBO, VAO, EBO;
