@@ -8,7 +8,7 @@
 
 class Robot{
     public:
-
+    
     std::vector<double> dots;// stride = 1
     std::vector<double> springs;// stride = 4 //k, a*sin(wt + b) + c 
     std::vector<double> PVA;// stride = 9
@@ -37,6 +37,9 @@ class Simulator{
     int t = 0;
     int step;
     void update();
+    float* pos;
+    void output();
+    
     Simulator(double dt, int step);
     ~Simulator();
 

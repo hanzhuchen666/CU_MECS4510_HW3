@@ -15,12 +15,14 @@ int Robot::getIndex(int i, int j){
 Simulator::Simulator(double dt, int step){
     this->dt = dt;
     this->step = step;
+    this->pos = new float[3*8];
 };
 
 Simulator::~Simulator(){
     for(int i = 0; i<this->robots.size(); ++i){
         delete this->robots[i];
     }
+    delete this->pos;
 };
 
 
@@ -98,6 +100,12 @@ void Simulator::update(){
 
             }
         }
+        
+        //gravity
+        for(int i = 0; i<robot->dots.size(); ++i){
+            robot->PVA[9*i+7] -= 9.8;
+        }
+        
         for(int j = 0; j<robot->dots.size(); ++j){
             //integrate
             robot->PVA[9*j+3] += robot->PVA[9*j+6]*dt;
@@ -108,24 +116,42 @@ void Simulator::update(){
             robot->PVA[9*j+2] += robot->PVA[9*j+5]*dt;
             
         }
+        for(int i = 0; i<robot->dots.size(); ++i){
+            if(robot->PVA[9*i+1]< 0 ){
+                robot->PVA[9*i+1] = -robot->PVA[9*i+1] ;
+                robot->PVA[9*i+4] = -robot->PVA[9*i+4] ;
+            }
+        }
     }
+    // if hit ground
+    
     return;
 }
 
 BoxRobot::BoxRobot(){
     this->addDots(1,0,0,0);
-    this->addDots(1,1,0,0);
-    this->addDots(1,0,1,0);
-    this->addDots(1,0,0,1);
-    this->addDots(1,1,1,0);
-    this->addDots(1,0,1,1);
-    this->addDots(1,1,0,1);
-    this->addDots(1,1,1,1);
+    this->addDots(1,10,0,0);
+    this->addDots(1,0,10,0);
+    this->addDots(1,0,0,10);
+    this->addDots(1,10,10,0);
+    this->addDots(1,0,10,10);
+    this->addDots(1,10,0,10);
+    this->addDots(1,10,10,10);
 };
 
 TwoPoints::TwoPoints(){
     this->addDots(1,0,0,0);
     this->addDots(1,1,0,0);
+}
+
+void Simulator::output(){
+    auto& robot = this->robots[0];
+    for(int i =0; i<this->robots[0]->dots.size();++i){
+        this->pos[3*i] = robot->PVA[9*i+0];
+        this->pos[3*i+1] = robot->PVA[9*i+1];
+        this->pos[3*i+2] = robot->PVA[9*i+2];
+        
+    }
 }
 
 void Simulator::randomAddRobots(int n_robot, int n_dots){

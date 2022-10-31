@@ -1,11 +1,21 @@
+//
+//  main.cpp
+//  sim_try
+//
+//  Created by Qianhuang Li on 10/30/22.
+//
 #include "SimulatorBase.hpp"
 #include <iomanip>
 #include <glad/glad.h>
-#include <Visualize.hpp>
+#include "Visualize.hpp"
 
 int main(){
     int step = 10000;
-    double dt = 0.001;
+    double dt = 0.01;
+    
+    Simulator sim(dt, step);
+    sim.robots.push_back(new BoxRobot);
+    
 
     Visualizer vis = Visualizer();
     vis.initWindow();
@@ -24,23 +34,26 @@ int main(){
     
     };
     unsigned int indices[] = {  // note that we start from 0!
-            0, 1, 2,  // back
-            1, 2, 3,   //
-            4, 6, 7,   // front
-            4, 5, 7,
-            2, 0, 4,  // left
-            2, 6, 4,  //
-            1, 3, 7,  //right
-            1, 5, 7,  //
-            2, 6, 7,  //up
-            2, 3, 7,
-            0, 1, 5,  //bottom
-            0, 4, 5
+            0, 1, 4,  // back
+            0, 2, 4,   //
+            3, 5, 7,   // front
+            3, 6, 7,
+            0, 2, 4,  // left
+            0, 3, 5,  //
+            1, 4, 7,  //right
+            1, 6, 7,  //
+            2, 4, 7,  //up
+            2, 5, 7,
+            0, 1, 6,  //bottom
+            0, 3, 6
         };
     while(!glfwWindowShouldClose(vis.window)){
+        sim.update();
+        sim.output();
+        std::cout<<sim.pos.size<<std::endl;
         
         vis.inloop1();
-        vis.input(vertices, sizeof(vertices),indices,sizeof(indices));
+        vis.input(sim.pos, 24,indices,sizeof(indices));
         vis.inloop2();
     }
     return 0;

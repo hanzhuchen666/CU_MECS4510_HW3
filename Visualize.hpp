@@ -6,7 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 // #include <gl.h>
 #include "shader.h"
-#include "camera.h"
+
 
 
 // settings
