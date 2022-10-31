@@ -11,7 +11,7 @@
 
 int main(){
     int step = 10000;
-    double dt = 0.01;
+    double dt = 0.001;
     
     Simulator sim(dt, step);
     sim.robots.push_back(new BoxRobot);
@@ -47,13 +47,14 @@ int main(){
             0, 1, 6,  //bottom
             0, 3, 6
         };
+    std::cout<<sizeof(vertices)<<std::endl;
     while(!glfwWindowShouldClose(vis.window)){
         sim.update();
         sim.output();
-        std::cout<<sim.pos.size<<std::endl;
+        
         
         vis.inloop1();
-        vis.input(sim.pos, 24,indices,sizeof(indices));
+        vis.input(sim.pos, 24*4,indices,sizeof(indices));
         vis.inloop2();
     }
     return 0;
