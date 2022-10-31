@@ -130,13 +130,13 @@ void Simulator::update(){
 
 BoxRobot::BoxRobot(){
     this->addDots(1,0,0,0);
-    this->addDots(1,10,0,0);
-    this->addDots(1,0,10,0);
-    this->addDots(1,0,0,10);
-    this->addDots(1,10,10,0);
-    this->addDots(1,0,10,10);
-    this->addDots(1,10,0,10);
-    this->addDots(1,10,10,10);
+    this->addDots(1,5,0,0);
+    this->addDots(1,0,5,0);
+    this->addDots(1,0,0,5);
+    this->addDots(1,5,5,0);
+    this->addDots(1,0,5,5);
+    this->addDots(1,5,0,5);
+    this->addDots(1,5,5,5);
 };
 
 TwoPoints::TwoPoints(){
