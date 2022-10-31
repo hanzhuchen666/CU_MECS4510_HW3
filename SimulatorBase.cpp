@@ -30,7 +30,7 @@ void Robot::addSprings(){
     this->springs.push_back(10.0);
     this->springs.push_back(0.0);
     this->springs.push_back(0.0);
-    this->springs.push_back(1.5);
+    this->springs.push_back(8.0);
 };
 
 void Robot::addDots(double m){
