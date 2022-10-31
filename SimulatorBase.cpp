@@ -22,15 +22,15 @@ Simulator::~Simulator(){
     for(int i = 0; i<this->robots.size(); ++i){
         delete this->robots[i];
     }
-    delete this->pos;
+    delete[] this->pos;
 };
 
 
 void Robot::addSprings(){
-    this->springs.push_back(10.0);
+    this->springs.push_back(100.0);
     this->springs.push_back(0.0);
     this->springs.push_back(0.0);
-    this->springs.push_back(8.0);
+    this->springs.push_back(16.0);
 };
 
 void Robot::addDots(double m){
@@ -77,6 +77,7 @@ void Simulator::update(){
             robot->PVA[9*j+7] = 0;
             robot->PVA[9*j+8] = 0;
         }
+        robot->energy = 0;
         for(int j = 0; j<robot->dots.size()-1; ++j){
             for(int k = j+1; k<robot->dots.size(); ++k){
                 //interact
@@ -90,18 +91,25 @@ void Simulator::update(){
                 double ez = dz/length;
                 double l0 = robot->springs[index*4+1]* sin(robot->springs[index*4+2]) + robot->springs[index*4+3];
                 double fint = robot->springs[index*4+0]*(length - l0);
-                
-                robot->PVA[9*j+6] -= ex * fint/robot->dots[j]*dt;
-                robot->PVA[9*j+7] -= ey * fint/robot->dots[j]*dt;
-                robot->PVA[9*j+8] -= ez * fint/robot->dots[j]*dt;
-                robot->PVA[9*k+6] += ex * fint/robot->dots[k]*dt;
-                robot->PVA[9*k+7] += ey * fint/robot->dots[k]*dt;
-                robot->PVA[9*k+8] += ez * fint/robot->dots[k]*dt;
+                robot->energy += 0.5*robot->springs[index*4+0]*(length - l0)*(length - l0);
+                robot->PVA[9*j+6] -= ex * fint/robot->dots[j];
+                robot->PVA[9*j+7] -= ey * fint/robot->dots[j];
+                robot->PVA[9*j+8] -= ez * fint/robot->dots[j];
+                robot->PVA[9*k+6] += ex * fint/robot->dots[k];
+                robot->PVA[9*k+7] += ey * fint/robot->dots[k];
+                robot->PVA[9*k+8] += ez * fint/robot->dots[k];
 
             }
         }
+         //calculate energy
         
-        //gravity
+        for(int i =0; i<robot->dots.size();++i){
+            double vi_vi = robot->PVA[9*i+3]*robot->PVA[9*i+3]+ robot->PVA[9*i+4]*robot->PVA[9*i+4]+ robot->PVA[9*i+5]*robot->PVA[9*i+5];
+            robot->energy += 0.5*robot->dots[i]* vi_vi ;
+            robot->energy+= robot->dots[i]* 9.8 * robot->PVA[9*i+1];
+        }
+        
+        // gravity
         for(int i = 0; i<robot->dots.size(); ++i){
             robot->PVA[9*i+7] -= 9.8;
         }
@@ -116,14 +124,17 @@ void Simulator::update(){
             robot->PVA[9*j+2] += robot->PVA[9*j+5]*dt;
             
         }
+        // bounce
         for(int i = 0; i<robot->dots.size(); ++i){
             if(robot->PVA[9*i+1]< 0 ){
                 robot->PVA[9*i+1] = -robot->PVA[9*i+1] ;
                 robot->PVA[9*i+4] = -robot->PVA[9*i+4] ;
             }
         }
+       
     }
     // if hit ground
+
     
     return;
 }

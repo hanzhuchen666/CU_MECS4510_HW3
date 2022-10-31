@@ -11,7 +11,7 @@
 
 int main(){
     int step = 10000;
-    double dt = 0.001;
+    double dt = 0.0001;
     
     Simulator sim(dt, step);
     sim.robots.push_back(new BoxRobot);
@@ -50,6 +50,7 @@ int main(){
     std::cout<<sizeof(vertices)<<std::endl;
     while(!glfwWindowShouldClose(vis.window)){
         sim.update();
+        std::cout<<sim.robots[0]->energy<<std::endl;
         sim.output();
         
         
