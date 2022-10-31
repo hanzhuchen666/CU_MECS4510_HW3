@@ -2,6 +2,7 @@
 
 Visualizer::Visualizer(){
 };
+
 Visualizer::~Visualizer(){
     glDeleteVertexArrays(1, &this->VAO);
     glDeleteBuffers(1, &this->VBO);
@@ -103,6 +104,18 @@ void Visualizer::inloop1(){
                 // activate shader
         this->corShader->use();
 
+        // create camera
+        glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 1.0f);
+        glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
+        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+        glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
+        glm::vec3 cameraUp = glm::cross(cameraDirection, cameraRight);
+        glm::mat4 viewc;
+        viewc = glm::lookAt(glm::vec3(0.0f, 100.0f, -20.0f),
+               glm::vec3(0.0f, 0.0f, 0.0f),
+               glm::vec3(0.0f, 1.0f, 0.0f));
+
                 // create transformations
         glm::mat4 model         = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
         glm::mat4 view          = glm::mat4(1.0f);
@@ -118,6 +131,7 @@ void Visualizer::inloop1(){
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
                 // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
         corShader->setMat4("projection", projection);
+        corShader->setMat4("view", viewc);
 
 
 

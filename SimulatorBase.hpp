@@ -8,7 +8,6 @@
 
 class Robot{
     public:
-    
     std::vector<double> dots;// stride = 1
     std::vector<double> springs;// stride = 4 //k, a*sin(wt + b) + c 
     std::vector<double> PVA;// stride = 9
@@ -18,7 +17,6 @@ class Robot{
     static Robot* randomGenerate(int ndots);
     int getIndex(int i, int j);
     double energy;
-    
 };
 
 class TwoPoints:public Robot{
@@ -48,9 +46,12 @@ class Simulator{
     void mutate(double rate);
     void crossOver();
     void rankSelection();
-
-    
-
 };
 
+// class SimNoGravity:public Simulator{
+//     public:
+//     SimNoGravity();
+//     void update() override;
+
+// };
 
